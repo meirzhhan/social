@@ -1,8 +1,5 @@
-import React, { useRef, useState } from "react";
-import Counter from "./components/Counter";
-import ClassCounter from "./components/ClassCounter";
+import React, { useState } from "react";
 import './styles/App.css'
-import PostItem from "./components/PostItem";
 import PostList from "./components/PostList";
 import MyButton from "./components/UI/button/MyButton";
 import MyInput from "./components/UI/input/MyInput";
@@ -13,28 +10,28 @@ function App() {
     {id: 2, title: 'JavaScript 2', body: 'Description'},
     {id: 3, title: 'JavaScript 3', body: 'Description'}
   ])
-  const [title, setTitle] = useState(''); //Хук для управляемого инпута
-  const bodyInputRef = useRef();
+  const [post, setPost] = useState({title: '', body: ''});
 
   const addNewPost = (e) => {
     e.preventDefault();
-    console.log(title);
-    console.log(bodyInputRef.current.value);
+    
+    setPosts([...posts, {...post, id: Date.now()}])
+    setPost({title: '', body: ''})
   }
 
   return (
     <div className="App">
       <form>
-        {/* Управляемы компонент */}
+        {/* Управляемые компоненты */}
         <MyInput
-          value={title}
-          onChange={e => setTitle(e.target.value)}
+          value={post.title}
+          onChange={e => setPost({...post, title: e.target.value})}
           type="text"
           placeholder="Название поста"
         />
-        {/* Неупляемый компонент */}
         <MyInput
-          ref={bodyInputRef}
+          value={post.body}
+          onChange={e => setPost({...post, body: e.target.value})}
           type="text"
           placeholder="Описание поста"
         />
