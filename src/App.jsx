@@ -6,13 +6,10 @@ import PostFilter from './components/PostFilter';
 import MyModal from './components/UI/MyModal/MyModal';
 import MyButton from './components/UI/button/MyButton';
 import { usePosts } from './hooks/usePosts';
+import axios from 'axios';
 
 function App() {
-	const [posts, setPosts] = useState([
-		{ id: 1, title: 'aa', body: 'bb' },
-		{ id: 2, title: 'bb 2', body: 'aa' },
-		{ id: 3, title: 'cc 3', body: 'zz' }
-	]);
+	const [posts, setPosts] = useState([]);
 	
 	const [filter, setFilter] = useState({sort: '', query: ''});
 	//Видимость модального окна	
@@ -28,6 +25,11 @@ function App() {
 		setModal(false);
 	};
 
+	async function fetchPosts() {
+		const response = await axios.get('https://jsonplaceholder.typicode.com/posts');
+		setPosts(response.data);
+	}
+
 	// Удаление поста. --> Получение post из дочернего компонента
 	const removePost = (post) => {
 		setPosts(posts.filter(p => p.id !== post.id));
@@ -36,6 +38,7 @@ function App() {
 
 	return (
 		<div className="App">
+			<button onClick={fetchPosts}>GET POSTS</button>
 			<MyButton style={{marginTop: 30}} onClick={() => setModal(true)}>
 				Создать пользователя
 			</MyButton>
