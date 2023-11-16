@@ -7,19 +7,21 @@ const PostForm = ({create}) => {
 
     const addNewPost = (e) => {
         e.preventDefault();
-        const newPost = {
-            ...post,
-            id: Date.now(),
-        }
-        create(newPost)
-        setPost({title: '', body: ''})
-    }
+        if (post.title && post.body) {
+            const newPost = {
+                ...post,
+                id: Date.now(),
+            };
+            create(newPost);
+            setPost({title: '', body: ''});
+        }    
+    };
       
     return (
         <form>
             <MyInput
                 value={post.title}
-                onChange={e => setPost({...post, title: e.target.value})}
+                onChange={e => setPost({...post, title: e.target.value})} 
                 type="text"
                 placeholder="Название поста"
             />
