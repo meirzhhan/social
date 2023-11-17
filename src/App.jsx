@@ -12,6 +12,16 @@ function App() {
 			
 		</BrowserRouter>
 	);
+	// <Routes>
+    //         {routes.map((route, index) => (
+    //             <Route
+    //                 key={index}
+    //                 path={route.path}
+    //                 element={<route.component />}
+    //                 exact={route.exact}
+    //             />
+    //         ))}
+    //     </Routes>
 }
 
 export default App;

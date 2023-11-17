@@ -19,6 +19,7 @@ function Posts() {
 	const [modal, setModal] = useState(false);
 	// Общее колличество постов
 	const [totalPages, setTotalPages] = useState(0);
+	// eslint-disable-next-line no-unused-vars
 	const [limit, setLimit] = useState(10);
 	const [page, setPage] = useState(1);
 	// вызов функции который, сортирует и фильтрует
